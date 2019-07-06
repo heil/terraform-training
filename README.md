@@ -19,7 +19,7 @@
 
 * [Einführung zu AWS](tag-2/01-einführung-aws.md)
 * [Erstellen und Ausrollen eines public VPC's](tag-2/02-erstellen-public-vpc.md)
-* [Erstellen und Ausrollen eines kombinierten private / public VPS](tag-2/03-erstellen-private-vpc.md)
+* [Erstellen und Ausrollen eines kombinierten private / public VPC's](tag-2/03-erstellen-private-vpc.md)
 * [Erstellen einen OpenVPN Servers in AWS](tag-2/04-openvpn.md)
 * [Erstellung von VM's mit privaten Adressen](tag-2/05-private-ec2.md)
 

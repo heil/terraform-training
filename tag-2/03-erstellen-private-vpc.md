@@ -1,4 +1,4 @@
-# Erstellen und Ausrollen eines kombinierten private / public VPS
+# Erstellen und Ausrollen eines kombinierten private / public VPC's
 
 Siehe Code-Beispiel:
 
