@@ -13,19 +13,14 @@ data "aws_ami" "bionic" {
   }
 }
 
-resource "aws_key_pair" "example-01" {
-  key_name   = "example-01"
-  public_key = file("~/.ssh/id_rsa.aws.pub")
-}
-
-resource "aws_security_group" "example-01" {
-  name        = "example-01-external-access"
+resource "aws_security_group" "example-04" {
+  name        = "example-04-external-access"
   description = "Allow basic access from external"
 
   tags = {
-    Name        = "example-01-external-access"
-    Description = "Security Group example-01 for external access"
-    Environment = "day-01"
+    Name        = "example-04-external-access"
+    Description = "Security Group example-04 for external access"
+    Environment = "day-02"
   }
 }
 
@@ -35,8 +30,9 @@ resource "aws_security_group_rule" "ingress_tcp_22" {
   to_port           = "22"
   protocol          = "tcp"
   type              = "ingress"
-  security_group_id = aws_security_group.example-01.id
+  security_group_id = aws_security_group.example-04.id
 }
+
 
 resource "aws_security_group_rule" "ingress_icmp_echo_request" {
   cidr_blocks       = ["0.0.0.0/0"]
@@ -44,7 +40,7 @@ resource "aws_security_group_rule" "ingress_icmp_echo_request" {
   to_port           = "0"
   protocol          = "icmp"
   type              = "ingress"
-  security_group_id = aws_security_group.example-01.id
+  security_group_id = aws_security_group.example-04.id
 }
 
 resource "aws_security_group_rule" "egress_tcp_all" {
@@ -53,26 +49,31 @@ resource "aws_security_group_rule" "egress_tcp_all" {
   to_port           = "65234"
   protocol          = "tcp"
   type              = "egress"
-  security_group_id = aws_security_group.example-01.id
+  security_group_id = aws_security_group.example-04.id
 }
 
-resource "aws_instance" "example-01" {
-  ami             = data.aws_ami.bionic.id
-  instance_type   = "t2.nano"
-  key_name        = aws_key_pair.example-01.key_name
-  security_groups = [aws_security_group.example-01.name]
+data "aws_subnet_ids" "private" {
+  filter {
+    name   = "tag:Name"
+    values = ["example-02-subnet-02"]
+  }
+}
+
+resource "aws_instance" "example-04" {
+  ami                         = data.aws_ami.bionic.id
+  instance_type               = "t2.nano"
+  key_name                    = "example-03"
+  subnet_id                   = data.aws_subnet_ids.private.id
+  associate_public_ip_address = false
+  security_groups             = [aws_security_group.example-04.name]
 
   tags = {
-    Name        = "example-01"
-    Description = "Instance example-01"
-    Environment = "day-01"
+    Name        = "example-04"
+    Description = "Instance example-04"
+    Environment = "day-02"
   }
 
   lifecycle {
     ignore_changes = ["user_data", "ami"]
   }
-}
-
-output "public_ip" {
-  value = aws_instance.example-01.public_ip
 }
