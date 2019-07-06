@@ -111,7 +111,9 @@ resource "aws_instance" "example-03" {
 
   provisioner "remote-exec" {
     inline = [
-      "sudo apt-get update",
+      "sudo sleep 20",
+      "sudo apt-get -y update",
+      "sudo sleep 20",
       "sudo apt-get -y install ansible",
     ]
 

@@ -88,3 +88,37 @@ resource "aws_route_table_association" "example-02-subnet-02" {
   subnet_id      = aws_subnet.example-02-subnet-02.id
   route_table_id = aws_route_table.example-02-subnet-02.id
 }
+
+#add second private subnet with different availzone for further use
+resource "aws_subnet" "example-02-subnet-03" {
+  vpc_id = aws_vpc.example-02.id
+
+  cidr_block        = "10.10.3.0/24"
+  availability_zone = "eu-central-1b"
+
+  tags = {
+    Name        = "example-02-subnet-03"
+    Description = "Private Subnet example-02-subnet-03 for VPC example-02"
+    Environment = "day-01"
+  }
+}
+
+resource "aws_route_table" "example-02-subnet-03" {
+  vpc_id = aws_vpc.example-02.id
+
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.example-02.id
+  }
+
+  tags = {
+    Name        = "Private Subnet"
+    Description = "Route Table for private subnet example-02-subnet-03"
+    Environment = "day-01"
+  }
+}
+
+resource "aws_route_table_association" "example-02-subnet-03" {
+  subnet_id      = aws_subnet.example-02-subnet-03.id
+  route_table_id = aws_route_table.example-02-subnet-03.id
+}
