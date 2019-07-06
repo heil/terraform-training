@@ -1,5 +1,5 @@
 # Erstellen einer virtuellen Maschine in AWS mit Terraform
 
-Siehe
+Siehe Code-Beispiel:
 
-[Beispiel 1](../beispiele/tag-1/01-simple-ec2)
+[Simple EC2](../beispiele/tag-1/01-simple-ec2)
