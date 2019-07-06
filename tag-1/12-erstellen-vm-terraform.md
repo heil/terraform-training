@@ -2,4 +2,4 @@
 
 Siehe
 
-[Beispiel 1](examples/tag-1/01-vm)
+[Beispiel 1](beispiele/tag-1/01-simple-ec2)

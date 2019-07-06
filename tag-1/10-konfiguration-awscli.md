@@ -15,7 +15,7 @@ Default output format [None]: json
 ### Zusätzliches Profil
 
 ```
-$ aws configure --profile user1
+$ aws configure --profile terraform-training
 AWS Access Key ID [None]: AKIAI44QH8DHBEXAMPLE
 AWS Secret Access Key [None]: je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
 Default region name [None]: eu-central-1
@@ -31,7 +31,7 @@ In `~/.aws/credentials` (Linux und Mac) oder `%USERPROFILE%\.aws\credentials` (W
 aws_access_key_id=AKIAIOSFODNN7EXAMPLE
 aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 
-[user1]
+[terraform-training]
 aws_access_key_id=AKIAI44QH8DHBEXAMPLE
 aws_secret_access_key=je7MtGbClwBF/2Zp9Utk/h3yCo8nvbEXAMPLEKEY
 ```
@@ -43,7 +43,7 @@ In `~/.aws/config` (Linux und Mac) oder `%USERPROFILE%\.aws\config` (Windows):
 region=eu-central-1
 output=json
 
-[profile user1]
+[profile terraform-training]
 region=eu-central-1
 output=text
 ```
