@@ -13,9 +13,17 @@ data "aws_ami" "bionic" {
   }
 }
 
+data "aws_vpc" "example-02" {
+  filter {
+    name   = "tag:Name"
+    values = ["example-02"]
+  }
+}
+
 resource "aws_security_group" "example-04" {
   name        = "example-04-external-access"
   description = "Allow basic access from external"
+  vpc_id      = data.aws_vpc.example-02.id
 
   tags = {
     Name        = "example-04-external-access"
@@ -52,20 +60,23 @@ resource "aws_security_group_rule" "egress_tcp_all" {
   security_group_id = aws_security_group.example-04.id
 }
 
-data "aws_subnet_ids" "private" {
+data "aws_subnet" "private" {
   filter {
     name   = "tag:Name"
     values = ["example-02-subnet-02"]
   }
+  vpc_id = data.aws_vpc.example-02.id
 }
 
 resource "aws_instance" "example-04" {
   ami                         = data.aws_ami.bionic.id
   instance_type               = "t2.nano"
   key_name                    = "example-03"
-  subnet_id                   = data.aws_subnet_ids.private.id
+  subnet_id                   = data.aws_subnet.private.id
   associate_public_ip_address = false
-  security_groups             = [aws_security_group.example-04.name]
+
+  vpc_security_group_ids = [aws_security_group.example-04.id]
+
 
   tags = {
     Name        = "example-04"

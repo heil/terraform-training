@@ -40,13 +40,13 @@ openvpn_port: "1194"
 openvpn_protocol: "udp"
 
 # It assume that the subnet mask is /24
-openvpn_network: "10.8.0.0" 
+openvpn_network: "10.8.0.0"
 
 # Private Subnet(s) in VPC that you want to reach through OPENVPN, it assume that the subnet mask is /24
 private_networks:
   - 10.10.20.0
   - 10.10.30.0
- 
+
 # Please mentioned the clients' name at this location
 openvpn_clients:
   - laptop
@@ -75,5 +75,3 @@ After editing the vars and hosts file as per requirements, run this command:
 ```shell
 ansible-playbook -i hosts site.yml
 ```
-
-[Check it out!]:https://rbgeek.wordpress.com/2015/08/17/install-openvpn-server-using-ansible-over-aws-vpc/

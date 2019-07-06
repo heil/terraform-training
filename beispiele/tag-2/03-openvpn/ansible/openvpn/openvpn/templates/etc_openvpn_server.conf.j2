@@ -6,24 +6,16 @@ ca ca.crt
 cert server.crt
 key server.key  # This file should be kept secret
 dh dh{{ openvpn_key_size }}.pem
-#VPN subnet for OpenVPN to draw client addresses from.
-server 10.8.0.0 255.255.255.0
+server {{openvpn_network}} 255.255.255.0
 ifconfig-pool-persist ipp.txt
-
-#Push routes to the client to allow it to reach other
-#private subnets behind the server.
 
 {% for net in private_networks %}
 push "route {{ net }} 255.255.0.0"
 {% endfor %}
 
-#If you want that all of your Internet traffic pass
-#through the VPN server then enable this
 ;push "redirect-gateway def1 bypass-dhcp"
 ;push "redirect-gateway def1"
 
-# For name resolution
-;push "dhcp-option DNS 10.8.0.1"
 client-to-client
 keepalive 10 120
 tls-auth ta.key 0 # This file is secret
@@ -35,4 +27,4 @@ group nogroup
 persist-key
 persist-tun
 status openvpn-status.log
-verb 3
+verb 1

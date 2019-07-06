@@ -18,15 +18,24 @@ resource "aws_key_pair" "example-03" {
   public_key = file("~/.ssh/id_rsa.aws.pub")
 }
 
+data "aws_vpc" "example-02" {
+  filter {
+    name   = "tag:Name"
+    values = ["example-02"]
+  }
+}
+
 resource "aws_security_group" "example-03" {
   name        = "example-03-external-access"
   description = "Allow basic access from external"
+  vpc_id      = data.aws_vpc.example-02.id
 
   tags = {
     Name        = "example-03-external-access"
     Description = "Security Group example-03 for external access"
     Environment = "day-02"
   }
+
 }
 
 resource "aws_security_group_rule" "ingress_tcp_22" {
@@ -65,19 +74,30 @@ resource "aws_security_group_rule" "egress_tcp_all" {
   security_group_id = aws_security_group.example-03.id
 }
 
-data "aws_subnet_ids" "public" {
+resource "aws_security_group_rule" "egress_icmp_echo_request" {
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = "8"
+  to_port           = "0"
+  protocol          = "icmp"
+  type              = "egress"
+  security_group_id = aws_security_group.example-03.id
+}
+
+data "aws_subnet" "public" {
   filter {
     name   = "tag:Name"
     values = ["example-02-subnet-01"]
   }
+  vpc_id = data.aws_vpc.example-02.id
 }
 
 resource "aws_instance" "example-03" {
-  ami             = data.aws_ami.bionic.id
-  instance_type   = "t2.nano"
-  key_name        = aws_key_pair.example-03.key_name
-  subnet_id       = data.aws_subnet_ids.public.id
-  security_groups = [aws_security_group.example-03.name]
+  ami                         = data.aws_ami.bionic.id
+  associate_public_ip_address = true
+  instance_type               = "t2.nano"
+  key_name                    = aws_key_pair.example-03.key_name
+  subnet_id                   = data.aws_subnet.public.id
+  vpc_security_group_ids      = [aws_security_group.example-03.id]
 
   tags = {
     Name        = "example-03"
@@ -125,4 +145,5 @@ resource "null_resource" "run_ansible" {
     working_dir = "${path.root}/ansible/openvpn"
     command     = "ansible-playbook -i ../inventory site.yml"
   }
+  depends_on = ["aws_instance.example-03"]
 }
