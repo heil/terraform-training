@@ -2,4 +2,4 @@
 
 Siehe
 
-[Beispiel 1](beispiele/tag-1/01-simple-ec2)
+[Beispiel 1](../beispiele/tag-1/01-simple-ec2)
