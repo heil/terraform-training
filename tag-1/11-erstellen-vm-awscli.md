@@ -34,3 +34,12 @@ aws ec2 authorize-security-group-ingress --group-name ssh-external \
     --protocol tcp --port 22 --cidr 0.0.0.0/0 \
     --profile PROFILE_NAME
 ```
+
+## Erstellen von VM's
+
+```
+aws ec2 run-instances --image-id ami-05af84768964d3dc0 \
+    --instance-type t2.nano --key-name "YOUR_NAME" \
+    --security-groups ssh-external --count 2 \
+    --profile PROFILE_NAME
+```
