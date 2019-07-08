@@ -1,4 +1,13 @@
 #abs
+variable "cidr" {
+  type    = "string"
+  default = "10.11.127.0/20"
+}
+
+output "host" {
+  value = cidrhost(var.cidr, 16)
+}
+
 output "abs" {
   value = abs(-1.2)
 }
@@ -25,7 +34,7 @@ variable "empty_string" {
   default = ""
 }
 
-# coalesce 
+# coalesce
 output "coalesce" {
-  value = "${coalesce(var.empty_string, var.string)}"
+  value = coalesce(var.empty_string, var.string)
 }
