@@ -1,0 +1,16 @@
+- hosts: all
+  remote_user: ubuntu
+  gather_facts: False
+
+  tasks:
+  - name: Check for Ansible
+    raw: test -e /usr/bin/ansible
+    changed_when: false
+    failed_when: false
+    register: check_ansible
+    become: yes
+
+  - name: Install Ansible
+    raw: apt -y update && apt install -y ansible
+    when: check_ansible != 0
+    become: yes

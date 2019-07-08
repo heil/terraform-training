@@ -109,22 +109,22 @@ resource "aws_instance" "example-03" {
     ignore_changes = ["user_data", "ami"]
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo sleep 20",
-      "sudo apt-get -y update",
-      "sudo sleep 20",
-      "sudo apt-get -y install ansible",
-    ]
-
-    connection {
-      host        = aws_instance.example-03.public_ip
-      type        = "ssh"
-      agent       = "false"
-      private_key = file("~/.ssh/id_rsa.aws")
-      user        = "ubuntu"
-    }
-  }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo sleep 20",
+  #     "sudo apt-get -y update",
+  #     "sudo sleep 20",
+  #     "sudo apt-get -y install ansible",
+  #   ]
+  #
+  #   connection {
+  #     host        = aws_instance.example-03.public_ip
+  #     type        = "ssh"
+  #     agent       = "false"
+  #     private_key = file("~/.ssh/id_rsa.aws")
+  #     user        = "ubuntu"
+  #   }
+  # }
 }
 
 data "template_file" "ansible_inventory" {
@@ -144,8 +144,8 @@ resource "null_resource" "run_ansible" {
     policy_sha1 = "${sha1(file("${path.root}/ansible/inventory"))}"
   }
   provisioner "local-exec" {
-    working_dir = "${path.root}/ansible/openvpn"
-    command     = "ansible-playbook -i ../inventory site.yml"
+    wodeperking_dir = "${path.root}/ansible/openvpn"
+    command         = "ansible-playbook -i ../inventory site.yml"
   }
   depends_on = ["aws_instance.example-03"]
 }
