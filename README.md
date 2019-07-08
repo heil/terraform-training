@@ -22,5 +22,13 @@
 * [Erstellen und Ausrollen eines kombinierten private / public VPC's](tag-2/03-erstellen-private-vpc.md)
 * [Erstellen einen OpenVPN Servers in AWS](tag-2/04-openvpn.md)
 * [Erstellung von VM's mit privaten Adressen](tag-2/05-private-ec2.md)
+* [Verwendung von Abhängigkeiten und Graphen mit Terraform](tag-2/06-abhängigkeiten-graph.md)
+* [Lokale versus Remote Terraform States](tag-2/07-backends.md)
 
 ## Tag 3
+
+* [Variablen ](tag-3/01-variables.md)
+* [Data Sources in Terraform](tag-3/02-data-sources.md)
+* [Cloud-Init](tag-3/03-cloud-init.md)
+* [Terraform Outputs](tag-3/04-outputs.md)
+* [Erstellung eines kompletten LAMP Stacks in AWS](tag-3/05-lamp.md)
