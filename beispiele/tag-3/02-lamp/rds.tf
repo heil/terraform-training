@@ -32,12 +32,14 @@ resource "aws_security_group_rule" "ingress_tcp_3306" {
 
 resource "aws_db_instance" "lamp-rds" {
   allocated_storage      = 10
+  apply_immediately      = true
+  db_subnet_group_name   = aws_db_subnet_group.lamp-rds.id
+  deletion_protection    = false
   engine                 = "mysql"
   identifier_prefix      = "lamp-rds"
   instance_class         = "db.t2.micro"
   name                   = "lamp"
   password               = "verySec9re"
   username               = "admin"
-  db_subnet_group_name   = aws_db_subnet_group.lamp-rds.id
   vpc_security_group_ids = [aws_security_group.lamp-rds.id]
 }

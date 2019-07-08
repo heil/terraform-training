@@ -10,3 +10,5 @@
 
 #
 /beispiele/tag-2/03-openvpn/ansible/inventory
+
+*.ovpn
