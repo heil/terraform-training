@@ -128,9 +128,9 @@ resource "aws_instance" "example-03" {
 }
 
 data "template_file" "ansible_inventory" {
-  template = "${file("templates/inventory.tpl")}"
+  template = file("templates/inventory.tpl")
   vars = {
-    ip_address = "${aws_instance.example-03.public_ip}"
+    ip_address = aws_instance.example-03.public_ip
   }
 }
 
@@ -141,11 +141,11 @@ resource "local_file" "inventory" {
 
 resource "null_resource" "run_ansible" {
   triggers = {
-    policy_sha1 = "${sha1(file("${path.root}/ansible/inventory"))}"
+    policy_sha1 = sha1(file("${path.root}/ansible/inventory"))
   }
   provisioner "local-exec" {
-    wodeperking_dir = "${path.root}/ansible/openvpn"
-    command         = "ansible-playbook -i ../inventory site.yml"
+    working_dir = "${path.root}/ansible/openvpn"
+    command     = "ansible-playbook -i ../inventory site.yml"
   }
   depends_on = ["aws_instance.example-03"]
 }
