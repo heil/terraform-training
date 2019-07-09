@@ -108,7 +108,7 @@ resource "aws_security_group_rule" "egress_icmp_echo_request" {
 module "centos-02" {
   source = "../../modules/terraform-module-aws-instance/block"
 
-  ami                         = data.aws_ami.bionic.id
+  ami                         = data.aws_ami.centos.id
   associate_public_ip_address = true
   domain_name                 = "cloud.local"
   hostname                    = "centos-01"
