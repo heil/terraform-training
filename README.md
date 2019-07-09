@@ -14,6 +14,7 @@
 * [Konfiguration AWS CLI](tag-1/10-konfiguration-awscli.md)
 * [Erstellen einer virtuellen Maschine in AWS mit dem AWS CLI](tag-1/11-erstellen-vm-awscli.md)
 * [Erstellen einer virtuellen Maschine in AWS mit Terraform](tag-1/12-erstellen-vm-terraform.md)
+* [Erstellung virtueller Maschinen in AWS mit Terraform](tag-1/13-erstellen-vms-terraform.md)
 
 ## Tag 2
 

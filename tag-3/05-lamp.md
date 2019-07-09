@@ -2,4 +2,4 @@
 
 Siehe Code-Beispiel:
 
-[LAMP-Stack](beispiele/tag-3/02-lamp)
+[LAMP-Stack](../beispiele/tag-3/02-lamp)
