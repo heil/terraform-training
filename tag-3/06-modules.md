@@ -18,6 +18,6 @@ Siehe Code-Beispiele:
 Siehe Code-Beispiele:
 
  - [Erstellen eines VPC mit workspaces](../beispiele/extras/glue/01-vpc)
- - [Erstellen einer Security Gruppe](../beispiele/extras/glue/01-sec)
+ - [Erstellen einer Security Gruppe](../beispiele/extras/glue/02-sec)
  - [Erstellen einer einfachen Instanz](../beispiele/extras/glue/03-instance-simple)
  - [Erstellen einer Instanz mit Block-Storage](../beispiele/extras/glue/04-instance-block)
