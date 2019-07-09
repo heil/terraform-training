@@ -11,6 +11,7 @@ A terraform module to provide an instance with a mounted block device in AWS, pr
 - `instance_type` - (Required) The type of instance to start.
 - `private_ip` - (Required) The private IP address to associate with the instance in a VPC.
 - `subnet_id` - (Required) The VPC Subnet ID to launch in.
+- `source_dest_check` - (Optional) Change Source-Destination Check for the instance in a VPC.
 - `tags` - (Optional) Dictionary of tags that will be added to all resources created by the module. Defaults to an empty map.
 - `vpc_security_group_ids` - (Required) A list of security group IDs to associate with.
 - `volume_delete_on_termination` - (Optional) Whether the volume should be destroyed on instance termination. Defaults to "false".
@@ -24,29 +25,35 @@ A terraform module to provide an instance with a mounted block device in AWS, pr
 
 ```lang=hcl
 provider "aws" {
-  profile = "comvel"
+  profile = "terraform-training"
   region  = "eu-central-1"
 }
 
-data "aws_ami" "ubuntu" {
+data "aws_ami" "centos" {
+  owners      = ["679593333241"]
   most_recent = true
-  owners      = ["099720109477"] # Canonical
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    values = ["CentOS Linux 7 x86_64 HVM EBS *"]
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
   }
 }
+
 
 module "instance" {
   source = "../terraform-module-aws-instance//block"
 
-  ami                                 = data.aws_ami.ubuntu.id
+  ami                                 = data.aws_ami.centos.id
   associate_public_ip_address         = true
   domain_name                         = "remote.cloud"
   hostname                            = "instance2"
@@ -65,3 +72,5 @@ module "instance" {
 ## Outputs
 
 - `id` - The ID of the instance.
+- `private_ip` - The private_ip of the instance.
+- `public_ip` - The public_ip of the instance if `associate_public_ip_address` was set to `true`.
