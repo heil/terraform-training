@@ -75,5 +75,5 @@ resource "aws_instance" "count-example-01" {
 }
 
 output "public_ip" {
-  value = aws_instance.count-example-01[*]
+  value = aws_instance.count-example-01[*].public_ip
 }
