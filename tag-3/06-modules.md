@@ -1,4 +1,4 @@
-# Erstellung und Verwendung von Modules
+# Erstellung und Verwendung von Modulen
 
 
 ## Module
