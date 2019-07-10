@@ -10,6 +10,5 @@ module "vpc" {
   namespace           = var.namespace
   private_subnets     = var.private_subnets[terraform.workspace]
   public_subnets      = var.public_subnets[terraform.workspace]
-  # single_nat_gateway  = true
-  stage = terraform.workspace
+  stage               = terraform.workspace
 }
