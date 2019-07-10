@@ -13,10 +13,10 @@ data "aws_ami" "bionic" {
   }
 }
 
-resource "aws_key_pair" "example-03" {
-  key_name   = "example-03"
-  public_key = file("~/.ssh/id_rsa.aws.pub")
-}
+# resource "aws_key_pair" "example-03" {
+#   key_name   = "example-03"
+#   public_key = file("~/.ssh/id_rsa.aws.pub")
+# }
 
 data "aws_vpc" "example-02" {
   filter {

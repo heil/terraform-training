@@ -71,7 +71,7 @@ data "aws_subnet" "private" {
 resource "aws_instance" "example-04" {
   ami                         = data.aws_ami.bionic.id
   instance_type               = "t2.nano"
-  key_name                    = "example-03"
+  key_name                    = var.ssh_key_name
   subnet_id                   = data.aws_subnet.private.id
   associate_public_ip_address = false
 
