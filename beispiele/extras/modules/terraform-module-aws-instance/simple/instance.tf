@@ -17,6 +17,17 @@ data "template_cloudinit_config" "mod" {
   }
 }
 
+
+data "template_file" "init_windows_mod" {
+  template = file("${path.module}/../templates/cloud-init_windows.tpl")
+
+  vars = {
+    username = var.domain_name
+    password    = var.hostname
+  }
+}
+
+
 resource "aws_instance" "mod" {
   ami                         = var.ami
   associate_public_ip_address = var.associate_public_ip_address
