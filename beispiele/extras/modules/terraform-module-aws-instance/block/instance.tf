@@ -1,5 +1,5 @@
 data "template_file" "init_mod" {
-  template = "${file("${path.module}/../templates/cloud-init.tpl")}"
+  template = "${file("${path.module}/../templates/cloud-linux.tpl")}"
 
   vars = {
     domain_name = var.domain_name
@@ -8,7 +8,7 @@ data "template_file" "init_mod" {
 }
 
 data "template_file" "init_mount_mod" {
-  template = file("${path.module}/../templates/cloud-init-mount.tpl")
+  template = file("${path.module}/../templates/cloud-mount.tpl")
 
   vars = {
     device       = var.volume_device
