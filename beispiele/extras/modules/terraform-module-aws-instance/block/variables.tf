@@ -3,6 +3,12 @@ variable "ami" {
   type        = "string"
 }
 
+variable "availability_zone" {
+  description = "The availability zone to use for instance and volume placement."
+  type        = "string"
+  default     = "eu-central-1a"
+}
+
 variable "associate_public_ip_address" {
   description = "Wether to associate a public IP address with an instance in a VPC."
   default     = false
