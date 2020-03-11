@@ -70,9 +70,9 @@ variable "vpc_security_group_ids" {
   type        = "list"
 }
 
-variable "volume_delete_on_termination" {
-  description = "Whether the volume should be destroyed on instance termination."
-  default     = false
+variable "skip_destroy" {
+  description = "on terraform destroy just remove the attachment from the state"
+  default     = true
 }
 
 variable "volume_device" {

@@ -14,7 +14,7 @@ A terraform module to provide an instance with a mounted block device in AWS, pr
 - `source_dest_check` - (Optional) Change Source-Destination Check for the instance in a VPC.
 - `tags` - (Optional) Dictionary of tags that will be added to all resources created by the module. Defaults to an empty map.
 - `vpc_security_group_ids` - (Required) A list of security group IDs to associate with.
-- `volume_delete_on_termination` - (Optional) Whether the volume should be destroyed on instance termination. Defaults to "false".
+- `skip_destroy` - (Optional) on terraform destroy just remove the attachment from the state. Defaults to true".
 - `volume_device` - (Required) The name of the device to mount.
 - `volume_label` - (Required) A human-readable label assigned to a volume mount point.
 - `volume_mount_point` - (Required) The mount point where the volume is mounted in the instance.

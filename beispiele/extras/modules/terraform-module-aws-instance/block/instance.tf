@@ -45,6 +45,7 @@ resource "aws_ebs_volume" "mod_volume" {
   availability_zone = var.availability_zone
   size              = var.volume_size
   type              = var.volume_type
+  skip_destroy      = var.skip_destroy
 }
 
 resource "aws_instance" "mod" {
@@ -83,7 +84,7 @@ resource "aws_volume_attachment" "mod_volume_attachment" {
 
     connection {
       type        = "ssh"
-      host        = aws_instance.mod.public_ip    // leads to deprecation warning!
+      host        = aws_instance.mod.public_ip // leads to deprecation warning!
       user        = "administrator"
       private_key = file("~/.ssh/id_rsa.aws")
       agent       = false
