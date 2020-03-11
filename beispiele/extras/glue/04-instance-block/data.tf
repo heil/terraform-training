@@ -16,17 +16,14 @@ data "aws_ami" "bionic" {
 data "aws_ami" "centos" {
   owners      = ["679593333241"]
   most_recent = true
-
   filter {
-    name   = "name"
-    values = ["CentOS Linux 7 x86_64 HVM EBS *"]
+    name   = "product-code"
+    values = ["aw0evgkw8e5c1q413zgy5pjce"]
   }
-
   filter {
     name   = "architecture"
     values = ["x86_64"]
   }
-
   filter {
     name   = "root-device-type"
     values = ["ebs"]
